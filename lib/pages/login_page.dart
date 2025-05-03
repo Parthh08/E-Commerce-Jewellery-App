@@ -13,8 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-  final emailController = TextEditingController(text: 'abc@gm.com');
-  final passwordController = TextEditingController(text: '1234');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final nameController = TextEditingController();
   bool isLogin = true;
@@ -22,6 +22,8 @@ class _LoginPageState extends State<LoginPage>
   late TabController _tabController;
   final _auth = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn();
+  bool _isGoogleSigningIn = false;
+  bool _isEmailAuthLoading = false;
 
   @override
   void initState() {
@@ -45,6 +47,10 @@ class _LoginPageState extends State<LoginPage>
   }
 
   Future<void> _handleAuth() async {
+    setState(() {
+      _isEmailAuthLoading = true;
+    });
+
     try {
       if (isLogin) {
         final userCredential = await _auth.signInWithEmailAndPassword(
@@ -62,6 +68,9 @@ class _LoginPageState extends State<LoginPage>
             backgroundColor: Colors.red,
             colorText: Colors.white,
           );
+          setState(() {
+            _isEmailAuthLoading = false;
+          });
           return;
         }
         final userCredential = await _auth.createUserWithEmailAndPassword(
@@ -69,7 +78,6 @@ class _LoginPageState extends State<LoginPage>
           password: passwordController.text,
         );
         if (userCredential.user != null) {
-          // Update display name
           await userCredential.user!.updateDisplayName(nameController.text);
           Get.snackbar(
             'Success',
@@ -87,13 +95,28 @@ class _LoginPageState extends State<LoginPage>
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isEmailAuthLoading = false;
+        });
+      }
     }
   }
 
   Future<void> _handleGoogleSignIn() async {
+    setState(() {
+      _isGoogleSigningIn = true;
+    });
+
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return;
+      if (googleUser == null) {
+        setState(() {
+          _isGoogleSigningIn = false;
+        });
+        return;
+      }
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -115,6 +138,9 @@ class _LoginPageState extends State<LoginPage>
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+      setState(() {
+        _isGoogleSigningIn = false;
+      });
     }
   }
 
@@ -286,7 +312,10 @@ class _LoginPageState extends State<LoginPage>
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: _handleGoogleSignIn,
+                              onTap:
+                                  _isGoogleSigningIn
+                                      ? null
+                                      : _handleGoogleSignIn,
                               borderRadius: BorderRadius.circular(25),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -296,22 +325,37 @@ class _LoginPageState extends State<LoginPage>
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(8),
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
+                                    if (_isGoogleSigningIn)
+                                      SizedBox(
+                                        width: 24,
+                                        height: 24,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                Theme.of(context).primaryColor,
+                                              ),
+                                        ),
+                                      )
+                                    else
+                                      Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                        ),
+                                        child: const Icon(
+                                          Icons.g_mobiledata_rounded,
+                                          color: Colors.red,
+                                          size: 28,
+                                        ),
                                       ),
-                                      child: const Icon(
-                                        Icons.g_mobiledata_rounded,
-                                        color: Colors.red,
-                                        size: 28,
-                                      ),
-                                    ),
                                     const SizedBox(width: 12),
-                                    const Text(
-                                      'Continue with Google',
-                                      style: TextStyle(
+                                    Text(
+                                      _isGoogleSigningIn
+                                          ? 'Signing in...'
+                                          : 'Continue with Google',
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.black87,
                                         fontWeight: FontWeight.w500,
@@ -459,18 +503,28 @@ class _LoginPageState extends State<LoginPage>
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: _handleAuth,
+          onTap: _isEmailAuthLoading ? null : _handleAuth,
           borderRadius: BorderRadius.circular(25),
           child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
-            ),
+            child:
+                _isEmailAuthLoading
+                    ? SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                    : Text(
+                      text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
+                    ),
           ),
         ),
       ),

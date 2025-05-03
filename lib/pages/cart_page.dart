@@ -11,9 +11,7 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: const Text('Shopping Cart'),
-      ),
+      appBar: AppBar(title: const Text('Shopping Cart')),
       body: Obx(() {
         if (cartController.cartItems.isEmpty) {
           return Center(
@@ -33,9 +31,9 @@ class CartPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   'Add some items to get started',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.grey,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
@@ -92,7 +90,7 @@ class CartPage extends StatelessWidget {
                                 product.image,
                                 width: 80,
                                 height: 80,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -126,8 +124,10 @@ class CartPage extends StatelessWidget {
                               children: [
                                 IconButton(
                                   icon: const Icon(Icons.add_circle_outline),
-                                  onPressed: () =>
-                                      cartController.incrementQuantity(product),
+                                  onPressed:
+                                      () => cartController.incrementQuantity(
+                                        product,
+                                      ),
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                                 Text(
@@ -139,8 +139,10 @@ class CartPage extends StatelessWidget {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.remove_circle_outline),
-                                  onPressed: () =>
-                                      cartController.decrementQuantity(product),
+                                  onPressed:
+                                      () => cartController.decrementQuantity(
+                                        product,
+                                      ),
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                               ],
@@ -175,10 +177,7 @@ class CartPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Subtotal',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        const Text('Subtotal', style: TextStyle(fontSize: 16)),
                         Text(
                           '\$${cartController.subtotal.toStringAsFixed(2)}',
                           style: const TextStyle(
@@ -192,10 +191,7 @@ class CartPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Tax',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        const Text('Tax', style: TextStyle(fontSize: 16)),
                         Text(
                           '\$${cartController.taxes.toStringAsFixed(2)}',
                           style: const TextStyle(
