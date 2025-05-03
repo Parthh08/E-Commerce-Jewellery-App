@@ -20,11 +20,13 @@ class ProductCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: const BorderSide(
-              color: Color(0xFFD4AF37), width: 0.5), // Gold border
+            color: Color(0xFFD4AF37),
+            width: 0.5,
+          ), // Gold border
         ),
         elevation: 4,
         shadowColor: const Color(0xFF212121).withOpacity(0.3),
-        color: const Color(0xFFFAF9F6), // Ivory background
+        color: const Color(0xFFFAF9F6), 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -34,19 +36,20 @@ class ProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12),
+                    ),
                     child: Image.network(
                       product.image,
                       width: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Container(
                           color: const Color(0xFFF5F5F5),
                           child: const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xFFD4AF37), // Gold
+                              color: Color(0xFFD4AF37), 
                             ),
                           ),
                         );
@@ -58,7 +61,7 @@ class ProductCard extends StatelessWidget {
                             child: Icon(
                               Icons.image_not_supported,
                               size: 40,
-                              color: Color(0xFF757575), // Medium Gray
+                              color: Color(0xFF757575), 
                             ),
                           ),
                         );
@@ -70,17 +73,23 @@ class ProductCard extends StatelessWidget {
                     left: 8,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A237E)
-                            .withOpacity(0.9), // Deep Royal Blue
+                        color: const Color(
+                          0xFF1A237E,
+                        ).withOpacity(0.9), // Deep Royal Blue
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.star,
-                              color: Color(0xFFD4AF37), size: 16), // Gold
+                          const Icon(
+                            Icons.star,
+                            color: Color(0xFFD4AF37),
+                            size: 16,
+                          ), // Gold
                           const SizedBox(width: 4),
                           Text(
                             product.rating.toStringAsFixed(1),
@@ -143,17 +152,20 @@ class ProductCard extends StatelessWidget {
                             '${product.title} has been added to your cart',
                             snackPosition: SnackPosition.BOTTOM,
                             margin: const EdgeInsets.all(8),
-                            backgroundColor:
-                                const Color(0xFF2E7D32), // Emerald Green
-                            colorText: const Color(0xFFFAF9F6), // Ivory
+                            backgroundColor: const Color(
+                              0xFF2E7D32,
+                            ), // Emerald Green
+                            colorText: const Color(0xFFFAF9F6), 
                             duration: const Duration(seconds: 2),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFD4AF37), // Gold
-                          foregroundColor: const Color(0xFFFAF9F6), // Ivory
+                          backgroundColor: const Color(0xFFD4AF37), 
+                          foregroundColor: const Color(0xFFFAF9F6), 
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),

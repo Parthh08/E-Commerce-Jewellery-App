@@ -30,11 +30,11 @@ class MyApp extends StatelessWidget {
           surface: Color(0xFFFAF9F6), // Ivory
           background: Color(0xFFFFF8E1), // Light Cream
           error: Color(0xFFC62828), // Ruby Red
-          onPrimary: Color(0xFFFAF9F6), // Ivory
-          onSecondary: Color(0xFFFAF9F6), // Ivory
-          onSurface: Color(0xFF212121), // Dark Charcoal
-          onBackground: Color(0xFF212121), // Dark Charcoal
-          onError: Color(0xFFFAF9F6), // Ivory
+          onPrimary: Color(0xFFFAF9F6), 
+          onSecondary: Color(0xFFFAF9F6), 
+          onSurface: Color(0xFF212121), 
+          onBackground: Color(0xFF212121), 
+          onError: Color(0xFFFAF9F6), 
           brightness: Brightness.light,
         ),
         textTheme: const TextTheme(
