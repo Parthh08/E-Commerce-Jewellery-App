@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,7 +9,9 @@ class ProfilePage extends StatelessWidget {
 
   Future<void> _handleLogout() async {
     try {
+      // Sign out from both Firebase and Google
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
       Get.offAll(() => LoginPage());
     } catch (e) {
       Get.snackbar(
