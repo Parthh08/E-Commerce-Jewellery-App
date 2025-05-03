@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'pages/home_page.dart';
 import 'pages/profile_page.dart';
+import 'pages/login_page.dart';
 import 'controllers/cart_controller.dart';
 import 'controllers/product_controller.dart';
 
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color(0xFFFFF8E1),
       ),
-      home: const MainPage(),
+      home: LoginPage(),
     );
   }
 }
@@ -80,10 +81,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const ProfilePage(),
-  ];
+  final List<Widget> _pages = [const HomePage(), const ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +99,13 @@ class _MainPageState extends State<MainPage> {
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined, color: Color(0xFFFAF9F6)),
+            selectedIcon: Icon(Icons.home, color: Color(0xFFFAF9F6)),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
+            icon: Icon(Icons.person_outline, color: Color(0xFFFAF9F6)),
+            selectedIcon: Icon(Icons.person, color: Color(0xFFFAF9F6)),
             label: 'Profile',
           ),
         ],
