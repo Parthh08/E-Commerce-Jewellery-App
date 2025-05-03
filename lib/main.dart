@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'pages/home_page.dart';
 import 'pages/profile_page.dart';
 import 'pages/login_page.dart';
 import 'controllers/cart_controller.dart';
 import 'controllers/product_controller.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -30,11 +33,11 @@ class MyApp extends StatelessWidget {
           surface: Color(0xFFFAF9F6), // Ivory
           background: Color(0xFFFFF8E1), // Light Cream
           error: Color(0xFFC62828), // Ruby Red
-          onPrimary: Color(0xFFFAF9F6), 
-          onSecondary: Color(0xFFFAF9F6), 
-          onSurface: Color(0xFF212121), 
-          onBackground: Color(0xFF212121), 
-          onError: Color(0xFFFAF9F6), 
+          onPrimary: Color(0xFFFAF9F6),
+          onSecondary: Color(0xFFFAF9F6),
+          onSurface: Color(0xFF212121),
+          onBackground: Color(0xFF212121),
+          onError: Color(0xFFFAF9F6),
           brightness: Brightness.light,
         ),
         textTheme: const TextTheme(

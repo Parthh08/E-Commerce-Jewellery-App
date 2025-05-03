@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../main.dart';  // Only needed imports
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../main.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -18,6 +20,8 @@ class _LoginPageState extends State<LoginPage>
   bool isLogin = true;
   bool isPasswordVisible = false;
   late TabController _tabController;
+  final _auth = FirebaseAuth.instance;
+  final _googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -40,46 +44,78 @@ class _LoginPageState extends State<LoginPage>
     super.dispose();
   }
 
-  void _handleAuth() {
-    if (isLogin) {
-      if (emailController.text == 'abc@gm.com' &&
-          passwordController.text == '1234') {
-        Get.offAll(() => const MainPage());  // Changed from HomePage to MainPage
+  Future<void> _handleAuth() async {
+    try {
+      if (isLogin) {
+        final userCredential = await _auth.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        if (userCredential.user != null) {
+          Get.offAll(() => const MainPage());
+        }
       } else {
-        Get.snackbar(
-          'Error',
-          'Invalid credentials',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+        if (passwordController.text != confirmPasswordController.text) {
+          Get.snackbar(
+            'Error',
+            'Passwords do not match',
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+          return;
+        }
+        final userCredential = await _auth.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
         );
+        if (userCredential.user != null) {
+          // Update display name
+          await userCredential.user!.updateDisplayName(nameController.text);
+          Get.snackbar(
+            'Success',
+            'Account created successfully! Please sign in.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          _tabController.animateTo(0);
+        }
       }
-    } else {
-      if (passwordController.text != confirmPasswordController.text) {
-        Get.snackbar(
-          'Error',
-          'Passwords do not match',
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
-        return;
-      }
+    } on FirebaseAuthException catch (e) {
       Get.snackbar(
-        'Success',
-        'Account created successfully! Please sign in.',
-        backgroundColor: Colors.green,
+        'Error',
+        e.message ?? 'Authentication failed',
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      _tabController.animateTo(0);
     }
   }
 
-  void _handleGoogleSignIn() {
-    Get.snackbar(
-      'Google Sign In',
-      'This feature will be implemented soon!',
-      backgroundColor: const Color(0xFFD4AF37),
-      colorText: Colors.white,
-    );
+  Future<void> _handleGoogleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
+      if (userCredential.user != null) {
+        Get.offAll(() => const MainPage());
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to sign in with Google: ${e.toString()}',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 
   @override

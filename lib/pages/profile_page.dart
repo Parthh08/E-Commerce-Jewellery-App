@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  Future<void> _handleLogout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => LoginPage());
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to log out: ${e.toString()}',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          IconButton(icon: const Icon(Icons.logout), onPressed: _handleLogout),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -22,22 +44,38 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundColor:
-                        Theme.of(context).primaryColor.withOpacity(0.1),
-                    child: const Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.grey,
-                    ),
+                    backgroundColor: Theme.of(
+                      context,
+                    ).primaryColor.withOpacity(0.1),
+                    backgroundImage:
+                        user?.photoURL != null
+                            ? NetworkImage(user!.photoURL!)
+                            : null,
+                    child:
+                        user?.photoURL == null
+                            ? const Icon(
+                              Icons.person,
+                              size: 50,
+                              color: Colors.grey,
+                            )
+                            : null,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Guest User',
-                    style: TextStyle(
+                  Text(
+                    user?.displayName ?? user?.email ?? 'Guest User',
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  if (user?.email != null && user?.displayName != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        user!.email!,
+                        style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -128,10 +166,7 @@ class ProfilePage extends StatelessWidget {
       leading: Icon(icon, color: Theme.of(context).primaryColor),
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       ),
       trailing: Icon(
         Icons.arrow_forward_ios,

@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "595528715990",
+    "project_id": "jewellery-shop-app-9fa7f",
+    "storage_bucket": "jewellery-shop-app-9fa7f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595528715990:android:2f34ba58b1bb8d97b78377",
+        "android_client_info": {
+          "package_name": "com.example.jewelry_app_o"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595528715990-cqp97mm73i8spu699b9c2f2ttg0c7eub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADbeBuQI6JA-kf-nw0emiXw74eNct1GIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595528715990-cqp97mm73i8spu699b9c2f2ttg0c7eub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595528715990:android:48fbe77b74b33d90b78377",
+        "android_client_info": {
+          "package_name": "com.jewellery_shop_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595528715990-5uplsbe1blco9e5iibfhc2ocicoikss6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jewellery_shop_app",
+            "certificate_hash": "70285ab4b23e1bd23778b323a91c139d0ae230cd"
+          }
+        },
+        {
+          "client_id": "595528715990-cqp97mm73i8spu699b9c2f2ttg0c7eub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADbeBuQI6JA-kf-nw0emiXw74eNct1GIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595528715990-cqp97mm73i8spu699b9c2f2ttg0c7eub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
