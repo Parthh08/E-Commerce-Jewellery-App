@@ -19,14 +19,11 @@ class ProductCard extends StatelessWidget {
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(
-            color: Color(0xFFD4AF37),
-            width: 0.5,
-          ), // Gold border
+          side: const BorderSide(color: Color(0xFFD4AF37), width: 0.5),
         ),
         elevation: 4,
         shadowColor: const Color(0xFF212121).withOpacity(0.3),
-        color: const Color(0xFFFAF9F6), 
+        color: const Color(0xFFFAF9F6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -49,7 +46,7 @@ class ProductCard extends StatelessWidget {
                           color: const Color(0xFFF5F5F5),
                           child: const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xFFD4AF37), 
+                              color: Color(0xFFD4AF37),
                             ),
                           ),
                         );
@@ -61,7 +58,7 @@ class ProductCard extends StatelessWidget {
                             child: Icon(
                               Icons.image_not_supported,
                               size: 40,
-                              color: Color(0xFF757575), 
+                              color: Color(0xFF757575),
                             ),
                           ),
                         );
@@ -77,9 +74,7 @@ class ProductCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(
-                          0xFF1A237E,
-                        ).withOpacity(0.9), // Deep Royal Blue
+                        color: const Color(0xFF1A237E).withOpacity(0.9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -94,7 +89,7 @@ class ProductCard extends StatelessWidget {
                           Text(
                             product.rating.toStringAsFixed(1),
                             style: const TextStyle(
-                              color: Color(0xFFFAF9F6), // Ivory
+                              color: Color(0xFFFAF9F6),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -115,7 +110,7 @@ class ProductCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF212121), // Dark Charcoal
+                      color: Color(0xFF212121),
                       height: 1.2,
                     ),
                     maxLines: 2,
@@ -126,7 +121,7 @@ class ProductCard extends StatelessWidget {
                     product.description,
                     style: const TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF757575), // Medium Gray
+                      color: Color(0xFF757575),
                       height: 1.4,
                     ),
                     maxLines: 2,
@@ -141,7 +136,7 @@ class ProductCard extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFD4AF37), // Gold
+                          color: Color(0xFFD4AF37),
                         ),
                       ),
                       ElevatedButton(
@@ -152,16 +147,14 @@ class ProductCard extends StatelessWidget {
                             '${product.title} has been added to your cart',
                             snackPosition: SnackPosition.BOTTOM,
                             margin: const EdgeInsets.all(8),
-                            backgroundColor: const Color(
-                              0xFF2E7D32,
-                            ), // Emerald Green
-                            colorText: const Color(0xFFFAF9F6), 
+                            backgroundColor: const Color(0xFF2E7D32),
+                            colorText: const Color(0xFFFAF9F6),
                             duration: const Duration(seconds: 2),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFD4AF37), 
-                          foregroundColor: const Color(0xFFFAF9F6), 
+                          backgroundColor: const Color(0xFFD4AF37),
+                          foregroundColor: const Color(0xFFFAF9F6),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 24,
                             vertical: 12,

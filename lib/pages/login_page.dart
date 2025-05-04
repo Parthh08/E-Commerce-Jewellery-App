@@ -270,7 +270,6 @@ class _LoginPageState extends State<LoginPage>
 
                         const SizedBox(height: 24),
 
-                        // OR Divider
                         Row(
                           children: [
                             Expanded(
@@ -302,7 +301,6 @@ class _LoginPageState extends State<LoginPage>
 
                         const SizedBox(height: 24),
 
-                        // Google Sign In Button
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),

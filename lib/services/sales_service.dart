@@ -10,14 +10,13 @@ class SalesService {
   Future<void> incrementSales(Product product, int quantity) async {
     final productId = product.id.toString();
     _salesData[productId] = (_salesData[productId] ?? 0) + quantity;
-    // Simulate network delay
+
     await Future.delayed(const Duration(milliseconds: 300));
   }
 
   Map<String, int> get salesData => Map.unmodifiable(_salesData);
 
   Future<Map<String, int>> getSalesData() async {
-    // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 300));
     return salesData;
   }

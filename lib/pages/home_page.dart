@@ -15,29 +15,34 @@ class HomePage extends StatelessWidget {
     final cartController = Get.find<CartController>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8E1), // Light Cream background
+      backgroundColor: const Color(0xFFFFF8E1),
       appBar: AppBar(
         title: const Text(
           'Luxury Jewelry',
           style: TextStyle(
-              color: Color(0xFFFAF9F6),
-              fontWeight: FontWeight.w500), // Ivory text
+            color: Color(0xFFFAF9F6),
+            fontWeight: FontWeight.w500,
+          ),
         ),
-        backgroundColor: const Color(0xFFD4AF37), // Gold
+        backgroundColor: const Color(0xFFD4AF37),
         actions: [
           Stack(
             children: [
               IconButton(
-                icon: const Icon(Icons.shopping_cart_outlined,
-                    color: Color(0xFFFAF9F6)),
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Color(0xFFFAF9F6),
+                ),
                 onPressed: () => Get.to(() => const CartPage()),
               ),
-              Obx(() => Positioned(
-                    right: 8,
-                    top: 8,
-                    child: cartController.cartItems.isEmpty
-                        ? const SizedBox()
-                        : Container(
+              Obx(
+                () => Positioned(
+                  right: 8,
+                  top: 8,
+                  child:
+                      cartController.cartItems.isEmpty
+                          ? const SizedBox()
+                          : Container(
                             padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
                               color: Color(0xFF1A237E),
@@ -46,12 +51,13 @@ class HomePage extends StatelessWidget {
                             child: Text(
                               cartController.cartItems.length.toString(),
                               style: const TextStyle(
-                                color: Color(0xFFFAF9F6), 
+                                color: Color(0xFFFAF9F6),
                                 fontSize: 12,
                               ),
                             ),
                           ),
-                  )),
+                ),
+              ),
             ],
           ),
         ],
@@ -68,9 +74,8 @@ class HomePage extends StatelessWidget {
             if (productController.isLoading.value) {
               return const SliverFillRemaining(
                 child: Center(
-                    child: CircularProgressIndicator(
-                  color: Color(0xFFD4AF37), // Gold
-                )),
+                  child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+                ),
               );
             }
             if (productController.products.isEmpty) {
@@ -78,10 +83,7 @@ class HomePage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'No products available',
-                    style: TextStyle(
-                      color: Color(0xFF212121), // Dark Charcoal
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Color(0xFF212121), fontSize: 16),
                   ),
                 ),
               );
@@ -89,19 +91,16 @@ class HomePage extends StatelessWidget {
             return SliverPadding(
               padding: const EdgeInsets.all(16.0),
               sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final product = productController.products[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Hero(
-                        tag: 'product-${product.id}',
-                        child: ProductCard(product: product),
-                      ),
-                    );
-                  },
-                  childCount: productController.products.length,
-                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final product = productController.products[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Hero(
+                      tag: 'product-${product.id}',
+                      child: ProductCard(product: product),
+                    ),
+                  );
+                }, childCount: productController.products.length),
               ),
             );
           }),

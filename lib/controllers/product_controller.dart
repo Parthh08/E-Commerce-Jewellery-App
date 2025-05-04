@@ -16,7 +16,9 @@ class ProductController extends GetxController {
   void fetchProducts() async {
     try {
       isLoading(true);
-      final response = await http.get(Uri.parse('https://fakestoreapi.com/products/category/jewelery'));
+      final response = await http.get(
+        Uri.parse('https://fakestoreapi.com/products/category/jewelery'),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         products.value = data.map((json) => Product.fromJson(json)).toList();

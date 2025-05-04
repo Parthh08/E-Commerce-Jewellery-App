@@ -9,7 +9,6 @@ class ProfilePage extends StatelessWidget {
 
   Future<void> _handleLogout() async {
     try {
-      // Sign out from both Firebase and Google
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
       Get.offAll(() => LoginPage());
@@ -41,7 +40,6 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            // Profile Image and Name Section
             Center(
               child: Column(
                 children: [

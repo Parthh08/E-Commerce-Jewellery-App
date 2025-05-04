@@ -45,7 +45,7 @@ class CartController extends GetxController {
     for (final entry in cartItems.entries) {
       await _salesService.incrementSales(entry.key, entry.value);
     }
-    salesUpdated.toggle(); // Move this before clearing cart
+    salesUpdated.toggle();
     clearCart();
     Get.snackbar(
       'Success',

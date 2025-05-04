@@ -32,7 +32,6 @@ class _SalesChartState extends State<SalesChart> {
     super.dispose();
   }
 
-  // Method to load sales data
   Future<void> _loadSalesData() async {
     final data = await _salesService.getSalesData();
     salesData.value = data;
@@ -40,7 +39,6 @@ class _SalesChartState extends State<SalesChart> {
 
   @override
   Widget build(BuildContext context) {
-    // Use Obx instead of FutureBuilder
     return Obx(() {
       final products = _productController.products.take(4).toList();
 
