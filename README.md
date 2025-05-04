@@ -1,16 +1,103 @@
-# jewelry_app_o
+# Luxury Jewelry App
 
-A new Flutter project.
+A sophisticated Flutter-based e-commerce application for luxury jewelry, featuring a modern UI with a premium gold and ivory color scheme.
+
+## Features
+
+- **Authentication**
+  - Email/Password login and registration
+  - Google Sign-In integration
+  - Secure Firebase authentication
+
+- **Product Management**
+  - Browse jewelry collection
+  - Detailed product views with high-resolution images
+  - Product ratings and descriptions
+  - Real-time price updates
+
+- **Shopping Experience**
+  - Interactive shopping cart
+  - Quantity management
+  - Smooth checkout process
+  - PhonePe payment integration
+
+- **User Features**
+  - User profile management
+  - Order history
+  - Sales analytics visualization
+  - Responsive bottom navigation
+
+## Technology Stack
+
+- **Frontend**: Flutter
+- **State Management**: GetX
+- **Backend**: Firebase
+- **Authentication**: Firebase Auth
+- **Payment Gateway**: PhonePe
+- **Analytics**: Custom sales tracking with FL Chart
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK (^3.7.2)
+- Dart SDK
+- Firebase account
+- Android Studio / VS Code
+- PhonePe merchant account
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository
+```bash
+git clone [repository-url]
+```
+
+2. Install dependencies
+```bash
+flutter pub get
+```
+
+3. Configure Firebase
+- Add your `google-services.json` to the Android app directory
+- Update Firebase configuration in `lib/firebase_options.dart`
+
+4. Run the app
+```bash
+flutter run
+```
+
+## Project Structure
+
+```
+lib/
+├── controllers/      # GetX controllers for state management
+├── models/          # Data models
+├── pages/           # UI screens
+├── services/        # Business logic and API services
+├── widgets/         # Reusable UI components
+└── main.dart        # Application entry point
+```
+
+## Color Scheme
+
+- Primary (Gold): `#D4AF37`
+- Secondary (Deep Royal Blue): `#1A237E`
+- Background (Light Cream): `#FFF8E1`
+- Surface (Ivory): `#FAF9F6`
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For support or queries, please reach out to [your-email]
