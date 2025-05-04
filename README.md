@@ -50,7 +50,7 @@ A sophisticated Flutter-based e-commerce application for luxury jewelry, featuri
 
 1. Clone the repository
 ```bash
-git clone [repository-url]
+git clone (https://github.com/Parthh08/jewelry_app_o.git)
 ```
 
 2. Install dependencies
@@ -100,4 +100,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For support or queries, please reach out to [your-email]
+For support or queries, please reach out to www.parthsingh0808@gmail.com
